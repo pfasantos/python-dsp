@@ -1,0 +1,9 @@
+mudei os buffers para ser no formato long e short no lugar de char.
+
+32 bits, 2 canais, 78125Hz
+5 MHz bitclock
+
+5 segundos
+
+
+VALIDADOS PELA FILTRAGEM EM PYTHON
