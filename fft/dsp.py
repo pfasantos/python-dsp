@@ -1,5 +1,4 @@
-from pickletools import uint8
-
+import os
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.fft import fft, fftfreq
@@ -81,6 +80,30 @@ def plot(spec, freq):
     plt.grid(True, which="both", linestyle='--', alpha=0.3)
     plt.tight_layout()
     plt.show()
+
+
+
+def plot_download(spec, freq, filename):
+    output_dir = "pdmrealres"
+    os.makedirs(output_dir, exist_ok=True)
+    
+    fig, ax = plt.subplots()
+    mag_db = 20 * np.log10(np.abs(spec) + 1e-12)
+    
+    ax.semilogx(freq, mag_db, linewidth=0.5)
+    ax.set_xlabel('Frequência (Hz)')
+    ax.set_ylabel('Magnitude (dB)')
+    ax.set_title('Espectro de Frequência (FFT)')
+    ax.grid(True, which="both", linestyle='--', alpha=0.25)
+    #ax.set_ylim(-20,120)
+    plt.tight_layout()
+    
+    base_name = os.path.splitext(filename)[0]
+    output_filename = f"{base_name}.png"
+    filepath = os.path.join(output_dir, output_filename)
+    
+    plt.savefig(filepath, dpi=300)
+    plt.close(fig)
 
 def plot_compare(sp1, sp2, f1, f2):
     # plot
